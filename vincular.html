@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vincular prototipo · BreathSafe</title>
+<meta name="description" content="Vinculación del dispositivo BreathSafe a la cuenta del paciente mediante código o QR.">
+<meta name="theme-color" content="#1E5AA8">
+<meta property="og:title" content="Vincular prototipo · BreathSafe">
+<meta property="og:description" content="Vinculación del dispositivo BreathSafe a la cuenta del paciente mediante código o QR.">
+<meta property="og:type" content="website">
+<link rel="icon" href="img/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="img/icon-192.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<a class="skip" href="#main">Saltar al contenido</a>
+<header class="site-header">
+  <nav class="container nav" aria-label="Principal">
+    <a class="brand" href="index.html"><img src="img/logo.svg" alt="" width="34" height="34">BreathSafe</a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="menu">Menú</button>
+    <ul class="nav-links" id="menu">
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="nosotros.html">Nosotros</a></li>
+      <li><a href="contacto.html">Contacto</a></li>
+      <li><a href="medico.html">Acceso médico</a></li>
+      <li><a class="btn btn-primary btn-sm" href="acceso.html">Portal del paciente</a></li>
+    </ul>
+  </nav>
+</header>
+<main id="main">
+<section class="section">
+  <div class="container auth-wrap">
+    <span class="eyebrow">Sincronización del prototipo</span>
+    <h1 style="font-size:2rem">Vincular dispositivo</h1>
+    <p class="muted">Sesión iniciada como <strong data-patient-name></strong>.</p>
+    <div class="notice hidden" id="current-device">Dispositivo vinculado actualmente: <strong id="current-device-id"></strong>. Si vincula otro, reemplazará al actual. <a href="panel.html">Volver al panel</a>.</div>
+    <div class="card mt-1">
+      <form class="form" id="link-form" novalidate>
+        <div class="field">
+          <label for="device">Código único del dispositivo</label>
+          <input id="device" name="device" placeholder="BS-2026-X89" autocomplete="off" autocapitalize="characters" spellcheck="false" pattern="BS-\d{4}-[A-Z0-9]{3}" required>
+          <small>Se encuentra en la etiqueta del prototipo. Formato: BS-AAAA-XXX. Para la demostración puede usar <strong>BS-2026-X89</strong>.</small>
+        </div>
+        <button class="btn btn-primary" type="submit">Autorizar sincronización</button>
+        <div class="form-msg" id="link-msg" role="status" aria-live="polite"></div>
+      </form>
+      <hr style="border:none;border-top:1px solid var(--line);margin:24px 0">
+      <button class="btn btn-outline" id="btn-qr" type="button">Escanear código QR</button>
+      <p class="small muted mt-1" id="qr-note">Permite leer el código QR del dispositivo con la cámara del teléfono.</p>
+      <video id="qr-video" class="hidden" playsinline muted style="width:100%;border-radius:12px;margin-top:12px;background:#000"></video>
+    </div>
+  </div>
+</section>
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <a class="brand" href="index.html" style="color:#fff"><img src="img/logo.svg" alt="" width="30" height="30">BreathSafe</a>
+        <p class="mt-1">Plataforma de monitoreo respiratorio IoT. Proyecto participante en la Etapa Nacional de InnovaTecNM 2026, área de Tecnología Médica e Innovación en Salud.</p>
+        <p class="small">Prototipo en desarrollo. La información mostrada es de apoyo y no sustituye la valoración médica.</p>
+      </div>
+      <div>
+        <h4>Sitio</h4>
+        <ul><li><a href="index.html">Inicio</a></li><li><a href="nosotros.html">Nosotros</a></li><li><a href="contacto.html">Contacto</a></li><li><a href="privacidad.html">Aviso de privacidad</a></li></ul>
+      </div>
+      <div>
+        <h4>Plataforma</h4>
+        <ul><li><a href="acceso.html">Portal del paciente</a></li><li><a href="acceso.html#registro">Crear cuenta</a></li><li><a href="medico.html">Acceso médico con PIN</a></li></ul>
+      </div>
+    </div>
+    <div class="footer-bottom">© <span data-year>2026</span> Proyecto BreathSafe · Instituto Tecnológico: [por confirmar] · <a href="privacidad.html">Aviso de privacidad</a></div>
+  </div>
+</footer>
+<div class="privacy-banner" id="privacy-banner" role="region" aria-label="Aviso de privacidad">
+  <p>Este sitio trata datos personales y de salud conforme a su <a href="privacidad.html">aviso de privacidad</a>. Solo se usa almacenamiento local del navegador para el funcionamiento del portal; no se emplean cookies de publicidad ni de rastreo.</p>
+  <button class="btn btn-primary btn-sm" id="privacy-accept">Entendido</button>
+</div>
+<script src="js/config.js"></script>
+<script src="js/common.js"></script>
+<script src="js/sim.js"></script>
+<script src="js/api.js"></script>
+<script src="js/vincular.js"></script>
+</body>
+</html>

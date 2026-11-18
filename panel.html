@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Panel de métricas · BreathSafe</title>
+<meta name="description" content="Panel de control de métricas respiratorias del paciente BreathSafe.">
+<meta name="theme-color" content="#1E5AA8">
+<meta property="og:title" content="Panel de métricas · BreathSafe">
+<meta property="og:description" content="Panel de control de métricas respiratorias del paciente BreathSafe.">
+<meta property="og:type" content="website">
+<link rel="icon" href="img/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="img/icon-192.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<a class="skip" href="#main">Saltar al contenido</a>
+<header class="site-header">
+  <nav class="container nav" aria-label="Principal">
+    <a class="brand" href="index.html"><img src="img/logo.svg" alt="" width="34" height="34">BreathSafe</a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="menu">Menú</button>
+    <ul class="nav-links" id="menu">
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="nosotros.html">Nosotros</a></li>
+      <li><a href="contacto.html">Contacto</a></li>
+      <li><a href="medico.html">Acceso médico</a></li>
+      <li><a class="btn btn-primary btn-sm" href="acceso.html">Portal del paciente</a></li>
+    </ul>
+  </nav>
+</header>
+<div class="medical-header">
+  <div class="container">
+    <div><strong>Modo consulta médica</strong> · <span data-patient-name></span> · Dispositivo <span data-device-id></span></div>
+    <div class="flex"><button class="btn btn-sm" type="button" data-export>Exportar reporte para médico</button><button class="btn btn-sm" type="button" id="btn-exit-medico">Salir (Esc)</button></div>
+  </div>
+</div>
+<main id="main">
+<div id="app">
+  <div class="app-bar hide-in-medical">
+    <div class="container">
+      <div>
+        <div class="small muted">Paciente</div>
+        <div style="font-weight:800;font-size:1.25rem;color:var(--navy)" data-patient-name></div>
+        <div class="small">Dispositivo <strong data-device-id></strong> · <span class="badge tag-demo hidden" data-demo-only>Datos simulados</span></div>
+      </div>
+      <div class="app-actions">
+        <button class="btn btn-primary btn-sm" type="button" id="btn-medico">Ver Modo Médico</button>
+        <button class="btn btn-outline btn-sm" type="button" data-export>Exportar Reporte para Médico</button>
+        <button class="btn btn-ghost btn-sm" type="button" id="btn-logout">Cerrar sesión</button>
+      </div>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <div class="notice hide-in-medical hidden mb-0" data-demo-only><strong>Modo demostración:</strong> las lecturas provienen de un dispositivo simulado que reproduce el formato del prototipo (una lectura cada 2 s). El historial es sintético.</div>
+      <div class="flex between mt-1" style="margin-bottom:16px">
+        <span class="status-pill st-na" id="overall">Estado general: sin dato</span>
+        <span class="small muted">Última lectura: <strong id="last-update">—</strong></span>
+      </div>
+      <div class="grid grid-4" id="kpis"></div>
+
+      <div class="card mt-2">
+        <div class="toolbar">
+          <h2 class="mb-0" style="font-size:1.2rem">Historial · <span data-range-label>Última hora</span></h2>
+          <div class="seg" role="group" aria-label="Rango de fechas">
+            <button type="button" data-range="hora">Última hora</button><button type="button" data-range="hoy">Hoy</button><button type="button" data-range="7d">7 días</button><button type="button" data-range="mes">Mes</button>
+          </div>
+        </div>
+        <div class="chart-box"><canvas id="chart-main" aria-label="Gráfica de frecuencia respiratoria y saturación de oxígeno"></canvas></div>
+        <div class="chart-box mt-1" style="height:200px"><canvas id="chart-flow" aria-label="Gráfica de flujo de aire"></canvas></div>
+        <p class="small muted mt-1 mb-0">Los puntos marcados en amarillo o rojo indican lecturas fuera del rango normal.</p>
+      </div>
+
+      <div class="grid grid-2 mt-2" style="align-items:start">
+        <div class="card">
+          <h2 style="font-size:1.2rem">Resumen estadístico</h2>
+          <div class="table-wrap"><table class="data">
+            <thead><tr><th>Métrica</th><th class="num">Mín.</th><th class="num">Prom.</th><th class="num">Máx.</th><th class="num">Fuera de rango</th></tr></thead>
+            <tbody id="stats"></tbody>
+          </table></div>
+        </div>
+        <div class="card">
+          <h2 style="font-size:1.2rem">Alertas y anomalías (<span data-alert-count>0</span>)</h2>
+          <ul class="alert-list" id="alerts"></ul>
+          <button class="btn btn-outline btn-sm mt-1 hide-in-medical hidden" type="button" id="btn-event" data-demo-only>Simular evento respiratorio</button>
+        </div>
+      </div>
+
+      <div class="grid grid-2 mt-2 hide-in-medical" style="align-items:start">
+        <div class="card">
+          <h2 style="font-size:1.2rem">Acceso temporal para su médico</h2>
+          <p>Genere un PIN de 6 dígitos. Su médico lo ingresa en <a href="medico.html">Acceso médico</a> y obtiene acceso de <strong>solo lectura durante 30 minutos</strong>, sin registrarse.</p>
+          <button class="btn btn-primary" type="button" id="btn-pin">Generar PIN médico</button>
+          <div class="hidden mt-1" id="pin-box">
+            <div class="pin-display" id="pin-value" aria-live="polite"></div>
+            <p class="small muted mt-1 mb-0">Vence en <strong id="pin-left"></strong>. Al generar uno nuevo, el anterior se invalida. <span data-demo-only class="hidden">En modo demostración, el PIN solo funciona en este mismo navegador.</span></p>
+          </div>
+          <div class="form-msg" id="pin-msg" role="alert"></div>
+        </div>
+        <div class="card">
+          <h2 style="font-size:1.2rem">Última transmisión del dispositivo</h2>
+          <p class="small muted">Paquete JSON recibido por la API (formato del prototipo).</p>
+          <pre id="payload" class="small" style="background:#0B2545;color:#DCE8F6;padding:14px;border-radius:10px;overflow:auto;margin:0">—</pre>
+        </div>
+      </div>
+
+      <div class="grid grid-2 mt-2 hide-in-medical" style="align-items:start">
+        <div class="card">
+          <h2 style="font-size:1.2rem">Perfil del paciente</h2>
+          <form class="form" id="profile-form">
+            <div class="field"><label for="p-name">Nombre</label><input id="p-name" name="name"></div>
+            <div class="form-row">
+              <div class="field"><label for="p-age">Edad</label><input id="p-age" name="age" type="number" min="0" max="120"></div>
+              <div class="field"><label for="p-gender">Género</label><select id="p-gender" name="gender"><option value="">Seleccione…</option><option>Femenino</option><option>Masculino</option><option>Otro</option><option>No especificado</option></select></div>
+            </div>
+            <div class="field"><label for="p-notes">Notas clínicas</label><textarea id="p-notes" name="notes"></textarea></div>
+            <button class="btn btn-outline" type="submit">Guardar perfil</button>
+            <div class="form-msg" id="profile-msg" role="status"></div>
+          </form>
+        </div>
+        <div class="card">
+          <h2 style="font-size:1.2rem">Referencia de umbrales</h2>
+          <p class="small">El semáforo se basa en la escala <strong>NEWS2</strong> (National Early Warning Score 2, Royal College of Physicians, 2017), escala para adultos, SpO₂ escala 1:</p>
+          <div class="table-wrap"><table class="data small">
+            <thead><tr><th>Métrica</th><th>Normal</th><th>Alerta</th><th>Crítico</th></tr></thead>
+            <tbody>
+              <tr><td>Frec. respiratoria (rpm)</td><td>12–20</td><td>9–11 · 21–24</td><td>≤8 · ≥25</td></tr>
+              <tr><td>SpO₂ (%)</td><td>≥96</td><td>92–95</td><td>≤91</td></tr>
+            </tbody>
+          </table></div>
+          <p class="small muted mt-1">NEWS2 está validada en adultos; no aplica a menores de 16 años ni a embarazadas. Pacientes con insuficiencia respiratoria hipercápnica pueden requerir la escala 2 de SpO₂ (objetivo 88–92 %), definida por su médico. El flujo de aire y la temperatura son informativos.</p>
+          <hr style="border:none;border-top:1px solid var(--line);margin:16px 0">
+          <p class="small mb-0">Dispositivo vinculado: <strong data-device-id></strong>. <a href="vincular.html">Cambiar</a> · <button class="btn-ghost" style="border:none;background:none;color:var(--crit);cursor:pointer;font:inherit;padding:0;text-decoration:underline" type="button" id="btn-unlink">Desvincular</button></p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <a class="brand" href="index.html" style="color:#fff"><img src="img/logo.svg" alt="" width="30" height="30">BreathSafe</a>
+        <p class="mt-1">Plataforma de monitoreo respiratorio IoT. Proyecto participante en la Etapa Nacional de InnovaTecNM 2026, área de Tecnología Médica e Innovación en Salud.</p>
+        <p class="small">Prototipo en desarrollo. La información mostrada es de apoyo y no sustituye la valoración médica.</p>
+      </div>
+      <div>
+        <h4>Sitio</h4>
+        <ul><li><a href="index.html">Inicio</a></li><li><a href="nosotros.html">Nosotros</a></li><li><a href="contacto.html">Contacto</a></li><li><a href="privacidad.html">Aviso de privacidad</a></li></ul>
+      </div>
+      <div>
+        <h4>Plataforma</h4>
+        <ul><li><a href="acceso.html">Portal del paciente</a></li><li><a href="acceso.html#registro">Crear cuenta</a></li><li><a href="medico.html">Acceso médico con PIN</a></li></ul>
+      </div>
+    </div>
+    <div class="footer-bottom">© <span data-year>2026</span> Proyecto BreathSafe · Instituto Tecnológico: [por confirmar] · <a href="privacidad.html">Aviso de privacidad</a></div>
+  </div>
+</footer>
+<div class="privacy-banner" id="privacy-banner" role="region" aria-label="Aviso de privacidad">
+  <p>Este sitio trata datos personales y de salud conforme a su <a href="privacidad.html">aviso de privacidad</a>. Solo se usa almacenamiento local del navegador para el funcionamiento del portal; no se emplean cookies de publicidad ni de rastreo.</p>
+  <button class="btn btn-primary btn-sm" id="privacy-accept">Entendido</button>
+</div>
+<script src="js/config.js"></script>
+<script src="js/common.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jspdf-autotable@3.8.2/dist/jspdf.plugin.autotable.min.js"></script>
+<script src="js/sim.js"></script>
+<script src="js/api.js"></script>
+<script src="js/dashboard.js"></script>
+<script src="js/panel.js"></script>
+</body>
+</html>

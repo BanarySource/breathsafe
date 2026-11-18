@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contacto · BreathSafe</title>
+<meta name="description" content="Datos de contacto de la líder y el co-líder del proyecto BreathSafe y formulario de contacto directo.">
+<meta name="theme-color" content="#1E5AA8">
+<meta property="og:title" content="Contacto · BreathSafe">
+<meta property="og:description" content="Datos de contacto de la líder y el co-líder del proyecto BreathSafe y formulario de contacto directo.">
+<meta property="og:type" content="website">
+<link rel="icon" href="img/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="img/icon-192.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<a class="skip" href="#main">Saltar al contenido</a>
+<header class="site-header">
+  <nav class="container nav" aria-label="Principal">
+    <a class="brand" href="index.html"><img src="img/logo.svg" alt="" width="34" height="34">BreathSafe</a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="menu">Menú</button>
+    <ul class="nav-links" id="menu">
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="nosotros.html">Nosotros</a></li>
+      <li><a href="contacto.html">Contacto</a></li>
+      <li><a href="medico.html">Acceso médico</a></li>
+      <li><a class="btn btn-primary btn-sm" href="acceso.html">Portal del paciente</a></li>
+    </ul>
+  </nav>
+</header>
+<main id="main">
+<section class="hero">
+  <div class="container">
+    <span class="eyebrow">Contacto y liderazgo</span>
+    <h1>Contacto</h1>
+    <p class="lead">Para jueces, evaluadores, profesionales de la salud e instituciones interesadas en el proyecto.</p>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="container grid grid-2">
+    <article class="card leader">
+      <div class="avatar" aria-hidden="true">IF</div>
+      <span class="role">Líder de proyecto</span>
+      <h2 class="mb-0" style="font-size:1.35rem">Irina Dehidre Franco Camacho</h2>
+      <dl>
+        <dt>Correo</dt><dd><a href="mailto:irina.dehidre.franco.camacho@gmail.com">irina.dehidre.franco.camacho@gmail.com</a></dd>
+        <dt>Teléfono</dt><dd><a href="tel:+527861058530">786 105 8530</a></dd>
+      </dl>
+    </article>
+    <article class="card leader">
+      <div class="avatar" aria-hidden="true">JA</div>
+      <span class="role">Co-líder de proyecto</span>
+      <h2 class="mb-0" style="font-size:1.35rem">José Gabriel Ávila González</h2>
+      <dl>
+        <dt>Correo</dt><dd><a href="mailto:josegabrielavilagonzalez716@gmail.com">josegabrielavilagonzalez716@gmail.com</a></dd>
+        <dt>Teléfono</dt><dd><a href="tel:+524471076162">447 107 6162</a></dd>
+      </dl>
+    </article>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container" style="max-width:760px">
+    <h2>Formulario de contacto directo</h2>
+    <p class="muted">El mensaje se envía por correo electrónico a la líder y al co-líder del proyecto.</p>
+    <form class="form card" id="contact-form" novalidate>
+      <div class="form-row">
+        <div class="field"><label for="c-nombre">Nombre *</label><input id="c-nombre" name="nombre" autocomplete="name" required></div>
+        <div class="field"><label for="c-correo">Correo electrónico *</label><input id="c-correo" name="correo" type="email" autocomplete="email" required></div>
+      </div>
+      <div class="form-row">
+        <div class="field"><label for="c-org">Organización / Institución</label><input id="c-org" name="organizacion" autocomplete="organization"></div>
+        <div class="field"><label for="c-asunto">Asunto *</label><input id="c-asunto" name="asunto" required></div>
+      </div>
+      <div class="field"><label for="c-msg">Mensaje *</label><textarea id="c-msg" name="mensaje" required></textarea></div>
+      <input type="text" name="_honey" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true">
+      <p class="small muted mb-0">Al enviar, acepta el tratamiento de sus datos de contacto conforme al <a href="privacidad.html">aviso de privacidad</a>.</p>
+      <div><button class="btn btn-primary" type="submit">Enviar mensaje</button></div>
+      <div class="form-msg" id="contact-msg" role="status" aria-live="polite"></div>
+    </form>
+  </div>
+</section>
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <a class="brand" href="index.html" style="color:#fff"><img src="img/logo.svg" alt="" width="30" height="30">BreathSafe</a>
+        <p class="mt-1">Plataforma de monitoreo respiratorio IoT. Proyecto participante en la Etapa Nacional de InnovaTecNM 2026, área de Tecnología Médica e Innovación en Salud.</p>
+        <p class="small">Prototipo en desarrollo. La información mostrada es de apoyo y no sustituye la valoración médica.</p>
+      </div>
+      <div>
+        <h4>Sitio</h4>
+        <ul><li><a href="index.html">Inicio</a></li><li><a href="nosotros.html">Nosotros</a></li><li><a href="contacto.html">Contacto</a></li><li><a href="privacidad.html">Aviso de privacidad</a></li></ul>
+      </div>
+      <div>
+        <h4>Plataforma</h4>
+        <ul><li><a href="acceso.html">Portal del paciente</a></li><li><a href="acceso.html#registro">Crear cuenta</a></li><li><a href="medico.html">Acceso médico con PIN</a></li></ul>
+      </div>
+    </div>
+    <div class="footer-bottom">© <span data-year>2026</span> Proyecto BreathSafe · Instituto Tecnológico: [por confirmar] · <a href="privacidad.html">Aviso de privacidad</a></div>
+  </div>
+</footer>
+<div class="privacy-banner" id="privacy-banner" role="region" aria-label="Aviso de privacidad">
+  <p>Este sitio trata datos personales y de salud conforme a su <a href="privacidad.html">aviso de privacidad</a>. Solo se usa almacenamiento local del navegador para el funcionamiento del portal; no se emplean cookies de publicidad ni de rastreo.</p>
+  <button class="btn btn-primary btn-sm" id="privacy-accept">Entendido</button>
+</div>
+<script src="js/config.js"></script>
+<script src="js/common.js"></script>
+<script src="js/contacto.js"></script>
+</body>
+</html>

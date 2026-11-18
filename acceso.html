@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Portal del paciente · BreathSafe</title>
+<meta name="description" content="Registro e inicio de sesión del portal del paciente BreathSafe.">
+<meta name="theme-color" content="#1E5AA8">
+<meta property="og:title" content="Portal del paciente · BreathSafe">
+<meta property="og:description" content="Registro e inicio de sesión del portal del paciente BreathSafe.">
+<meta property="og:type" content="website">
+<link rel="icon" href="img/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="img/icon-192.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<a class="skip" href="#main">Saltar al contenido</a>
+<header class="site-header">
+  <nav class="container nav" aria-label="Principal">
+    <a class="brand" href="index.html"><img src="img/logo.svg" alt="" width="34" height="34">BreathSafe</a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="menu">Menú</button>
+    <ul class="nav-links" id="menu">
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="nosotros.html">Nosotros</a></li>
+      <li><a href="contacto.html">Contacto</a></li>
+      <li><a href="medico.html">Acceso médico</a></li>
+      <li><a class="btn btn-primary btn-sm" href="acceso.html">Portal del paciente</a></li>
+    </ul>
+  </nav>
+</header>
+<main id="main">
+<section class="section">
+  <div class="container auth-wrap">
+    <span class="eyebrow">Portal privado</span>
+    <h1 style="font-size:2rem">Portal del paciente</h1>
+    <div class="notice mb-0" data-demo-note>
+      <strong>Modo demostración.</strong> Las cuentas y las lecturas se guardan únicamente en este navegador y los datos del dispositivo son simulados. No ingrese información clínica real.
+    </div>
+    <div class="card mt-1" data-demo-note>
+      <p class="mb-0"><strong>Evaluadores:</strong> entren directamente con una cuenta de ejemplo y el dispositivo BS-2026-X89 ya vinculado.</p>
+      <button class="btn btn-outline mt-1" id="btn-demo-account" type="button">Entrar con cuenta de demostración</button>
+    </div>
+
+    <div class="card mt-2">
+      <div class="tabs" role="tablist">
+        <button class="tab" role="tab" data-tab="login" aria-selected="true">Iniciar sesión</button>
+        <button class="tab" role="tab" data-tab="register" aria-selected="false">Crear cuenta</button>
+      </div>
+
+      <form class="form" id="login-form" novalidate>
+        <div class="field"><label for="l-email">Correo electrónico</label><input id="l-email" name="email" type="email" autocomplete="email" required></div>
+        <div class="field"><label for="l-pass">Contraseña</label><input id="l-pass" name="password" type="password" autocomplete="current-password" required></div>
+        <button class="btn btn-primary" type="submit">Iniciar sesión</button>
+        <div class="form-msg" id="login-msg" role="alert"></div>
+      </form>
+
+      <form class="form hidden" id="register-form" novalidate>
+        <div class="field"><label for="r-name">Nombre completo</label><input id="r-name" name="name" autocomplete="name" required></div>
+        <div class="field"><label for="r-email">Correo electrónico</label><input id="r-email" name="email" type="email" autocomplete="email" required></div>
+        <div class="form-row">
+          <div class="field"><label for="r-pass">Contraseña</label><input id="r-pass" name="password" type="password" minlength="8" autocomplete="new-password" required><small>Mínimo 8 caracteres.</small></div>
+          <div class="field"><label for="r-pass2">Confirmar contraseña</label><input id="r-pass2" name="password2" type="password" autocomplete="new-password" required></div>
+        </div>
+        <div class="form-row">
+          <div class="field"><label for="r-age">Edad</label><input id="r-age" name="age" type="number" min="0" max="120" inputmode="numeric"></div>
+          <div class="field"><label for="r-gender">Género</label>
+            <select id="r-gender" name="gender"><option value="">Seleccione…</option><option>Femenino</option><option>Masculino</option><option>Otro</option><option>No especificado</option></select></div>
+        </div>
+        <div class="field"><label for="r-notes">Notas clínicas (opcional)</label><textarea id="r-notes" name="notes" placeholder="Diagnóstico, tratamiento o indicaciones relevantes para su médico."></textarea></div>
+        <label class="flex small" style="flex-wrap:nowrap;align-items:flex-start"><input type="checkbox" name="consent" style="width:auto;min-height:0;margin-top:4px"> <span>Otorgo mi consentimiento expreso para el tratamiento de mis datos de salud conforme al <a href="privacidad.html">aviso de privacidad</a>.</span></label>
+        <button class="btn btn-primary" type="submit">Crear cuenta</button>
+        <div class="form-msg" id="register-msg" role="alert"></div>
+      </form>
+    </div>
+  </div>
+</section>
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <a class="brand" href="index.html" style="color:#fff"><img src="img/logo.svg" alt="" width="30" height="30">BreathSafe</a>
+        <p class="mt-1">Plataforma de monitoreo respiratorio IoT. Proyecto participante en la Etapa Nacional de InnovaTecNM 2026, área de Tecnología Médica e Innovación en Salud.</p>
+        <p class="small">Prototipo en desarrollo. La información mostrada es de apoyo y no sustituye la valoración médica.</p>
+      </div>
+      <div>
+        <h4>Sitio</h4>
+        <ul><li><a href="index.html">Inicio</a></li><li><a href="nosotros.html">Nosotros</a></li><li><a href="contacto.html">Contacto</a></li><li><a href="privacidad.html">Aviso de privacidad</a></li></ul>
+      </div>
+      <div>
+        <h4>Plataforma</h4>
+        <ul><li><a href="acceso.html">Portal del paciente</a></li><li><a href="acceso.html#registro">Crear cuenta</a></li><li><a href="medico.html">Acceso médico con PIN</a></li></ul>
+      </div>
+    </div>
+    <div class="footer-bottom">© <span data-year>2026</span> Proyecto BreathSafe · Instituto Tecnológico: [por confirmar] · <a href="privacidad.html">Aviso de privacidad</a></div>
+  </div>
+</footer>
+<div class="privacy-banner" id="privacy-banner" role="region" aria-label="Aviso de privacidad">
+  <p>Este sitio trata datos personales y de salud conforme a su <a href="privacidad.html">aviso de privacidad</a>. Solo se usa almacenamiento local del navegador para el funcionamiento del portal; no se emplean cookies de publicidad ni de rastreo.</p>
+  <button class="btn btn-primary btn-sm" id="privacy-accept">Entendido</button>
+</div>
+<script src="js/config.js"></script>
+<script src="js/common.js"></script>
+<script src="js/sim.js"></script>
+<script src="js/api.js"></script>
+<script src="js/acceso.js"></script>
+</body>
+</html>
